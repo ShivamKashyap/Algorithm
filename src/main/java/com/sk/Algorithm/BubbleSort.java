@@ -19,11 +19,11 @@ public class BubbleSort {
 				}
 			}
 		}
-		
+
 		int index = -1;
-		while(++index < arr.length) {
+		while (++index < arr.length) {
 			System.out.print(" " + arr[index]);
-			
+
 		}
 
 	}
