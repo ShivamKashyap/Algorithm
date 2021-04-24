@@ -25,6 +25,15 @@ class SortingAlgorithmsTest {
 		assertArrayEquals(result, arr);
 	}
 	
+	@Test
+	void testInsertionSort() {
+		SortingAlgorithms insertionSort = new SortingAlgorithms();
+		int arr[] = { 30, 10, 50, 20, 60, 40 };
+		int result[] = { 10, 20, 30, 40, 50, 60 };
+		insertionSort.insertionSort(arr);
+		assertArrayEquals(result, arr);
+	}
+	
 	
 
 }
