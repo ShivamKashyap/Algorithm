@@ -9,6 +9,9 @@ import java.util.Arrays;
  *
  */
 public class SortingAlgorithms {
+	private int[] bucketInsertTracker = null;
+	int[][] buckets = null;
+	int[] sortedArray = null;
 
 	/**
 	 * Bubble Sort moves highest value to the end of array in each iteration by
@@ -52,15 +55,15 @@ public class SortingAlgorithms {
 	 * smaller than the previous number once we find a number in array which is
 	 * smaller than previous we start another loop from than number until we find
 	 * the place for that number by swap adjacent numbers until find the perfect
-	 * location Perfect location means a[i-1] <= a[i] a[i+1]
+	 * location Perfect location means a[i-1] <= a[i] <= a[i+1]
 	 * 
 	 * @param arr >> unsorted input array of integers
 	 */
 	public void insertionSort(int[] arr) {
-		for (int index = 0; index < arr.length-1; index++) {
+		for (int index = 0; index < arr.length - 1; index++) {
 			int next = index + 1;
 			while (next > 0 && arr[next] < arr[next - 1]) {
-					
+
 				int temp = arr[next - 1];
 				arr[next - 1] = arr[next];
 				arr[next] = temp;
@@ -69,4 +72,77 @@ public class SortingAlgorithms {
 			}
 		}
 	}
+
+	/**
+	 * 
+	 * @param arr >> unsorted input array of integers
+	 */
+	public void bucketSort(int[] arr) {
+		sortedArray = new int[arr.length];
+
+		int numberOfBuckets = (int) Math.sqrt(arr.length) + 1;
+		// there can be chance that much of data goes into single bucket, so we would
+		// take bucket of size arr.length-1
+		buckets = new int[numberOfBuckets][arr.length];
+		initBucketArray(buckets);
+		bucketInsertTracker = new int[numberOfBuckets];
+		int maxValue = Integer.MIN_VALUE;
+		for (int value : arr) {
+			if (value > maxValue) {
+				maxValue = value;
+			}
+		}
+		for (int i = 0; i < arr.length; i++) {
+
+			int appropriateBucket = (int) Math.ceil((arr[i] * (numberOfBuckets - 1)) / maxValue);
+			insertIntoBucket(appropriateBucket, arr[i]);
+		}
+
+		int sortedArrayIndex = 0;
+		// sort each bucket and append
+		for (int i = 0; i < buckets.length; i++) {
+			int[] tmpArray = buckets[i];
+			insertionSort(tmpArray);
+			int index = 0;
+			while (index < tmpArray.length) {
+				int tmpVal = tmpArray[index];
+				if (tmpVal != -2147483648) {
+					sortedArray[sortedArrayIndex] = tmpVal;
+					sortedArrayIndex++;
+				}
+				index++;
+
+			}
+
+		}
+
+		arr = sortedArray;
+		printArray(arr);
+
+	}
+
+	private void initBucketArray(int[][] buckets2) {
+
+		for (int i = 0; i < buckets2.length; i++) {
+			for (int j = 0; j < buckets2[i].length; j++) {
+				buckets2[i][j] = Integer.MIN_VALUE;
+
+			}
+
+		}
+	}
+
+	private void insertIntoBucket(int appropriateBucket, int value) {
+
+		int trackerValue = bucketInsertTracker[appropriateBucket];
+		buckets[appropriateBucket][trackerValue] = value;
+		bucketInsertTracker[appropriateBucket] = trackerValue + 1;
+	}
+
+	void printArray(int[] arr) {
+		for (int i : arr) {
+			System.out.print(" " + i);
+		}
+	}
+
 }
