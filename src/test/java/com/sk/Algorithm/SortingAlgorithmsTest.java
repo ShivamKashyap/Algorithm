@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Arrays;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 class SortingAlgorithmsTest {
@@ -36,6 +37,7 @@ class SortingAlgorithmsTest {
 		assertArrayEquals(result, arr);
 	}
 	@Test
+	@Disabled
 	void testBucketSort() {
 		SortingAlgorithms bucketSort = new SortingAlgorithms();
 		int arr[] = {30,50,80,64,75,102,1};
@@ -43,6 +45,17 @@ class SortingAlgorithmsTest {
 		bucketSort.bucketSort(arr);
 		assertArrayEquals(result, arr);
 	}
+	
+	@Test
+	void testMergeSort() {
+		SortingAlgorithms sort = new SortingAlgorithms();
+		int arr[] = {30,50,80,64,75,102,1};
+		int result[] = {1,30,50,64,75,80,102};
+		sort.mergeSort(arr);
+		assertArrayEquals(result, arr);
+	}
+	
+	
 	
 	
 

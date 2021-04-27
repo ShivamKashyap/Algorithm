@@ -139,10 +139,102 @@ public class SortingAlgorithms {
 		bucketInsertTracker[appropriateBucket] = trackerValue + 1;
 	}
 
+	/**
+	 * prints the array on console dev method to test our code
+	 * 
+	 * @param arr
+	 */
 	void printArray(int[] arr) {
 		for (int i : arr) {
 			System.out.print(" " + i);
 		}
 	}
 
+	/**
+	 * 
+	 * @param arr
+	 */
+	void mergeSort(int[] arr) {
+		int lengthOfArr = arr.length;
+		if (lengthOfArr < 2) {
+			return;
+		}
+		int mid = lengthOfArr / 2;
+		// create and populate left array
+		int[] leftArr = new int[mid];
+		for (int i = 0; i < mid; i++) {
+			leftArr[i] = arr[i];
+		}
+		// create and populate right array
+		int[] rightArr = new int[lengthOfArr - mid];
+		for (int i = mid; i < lengthOfArr; i++) {
+			rightArr[i - mid] = arr[i];
+		}
+		mergeSort(leftArr);
+		mergeSort(rightArr);
+		merge(leftArr,rightArr,arr);
+
+	}
+	
+	/**
+	 * 
+	 * @param leftArr
+	 * @param rightArr
+	 * @param arr
+	 */
+	void merge(int[] leftArr,int[] rightArr,int[] arr) {
+		
+		int lenLeft = leftArr.length;
+		int lenRight = rightArr.length;
+		
+		int i=0, j = 0,k = 0;
+		
+		while(i < lenLeft && j < lenRight) {
+			
+			if(leftArr[i] <= rightArr[j]) {
+				arr[k] = leftArr[i];
+				i++;
+			}else {
+				arr[k] = rightArr[j];
+				j++;
+			}
+			k++;
+		}
+		while(i< lenLeft) {
+			arr[k] = leftArr[i];
+			i++;
+			k++;
+		}
+		while(j < lenRight) {
+			arr[k] = rightArr[j];
+			j++;
+			k++;
+		}
+		
+	}
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
