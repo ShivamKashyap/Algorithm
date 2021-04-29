@@ -54,6 +54,14 @@ class SortingAlgorithmsTest {
 		sort.mergeSort(arr);
 		assertArrayEquals(result, arr);
 	}
+	@Test
+	void testQuickSort() {
+		SortingAlgorithms sort = new SortingAlgorithms();
+		int arr[] = {30,50,80,64,75,102,1};
+		int result[] = {1,30,50,64,75,80,102};
+		sort.quickSort(arr,0,arr.length-1);
+		assertArrayEquals(result, arr);
+	}
 	
 	
 	
