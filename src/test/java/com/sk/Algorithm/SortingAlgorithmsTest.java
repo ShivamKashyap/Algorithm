@@ -63,6 +63,15 @@ class SortingAlgorithmsTest {
 		assertArrayEquals(result, arr);
 	}
 	
+	@Test
+	void testHeapSort() {
+		SortingAlgorithms sort = new SortingAlgorithms();
+		int arr[] = {30,50,80,64,75,102,1};
+		int result[] = {1,30,50,64,75,80,102};
+		sort.heapSort(arr);
+		assertArrayEquals(result, arr);
+	}
+	
 	
 	
 	
